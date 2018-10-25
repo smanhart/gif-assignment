@@ -15,6 +15,7 @@ function createButton() {
         b.attr("data-name", topics[i]);
         b.text(topics[i]);
         $("#titleButtons").append(b);
+        
     }
 }
 createButton();
@@ -65,6 +66,7 @@ function grabGif() {
     })
 }
 
+//on click for gifs to activate
 $(document).on("click", ".gif", function() {
     var state = $(this).attr("data-state");
     console.log(this)
@@ -80,14 +82,26 @@ $(document).on("click", ".gif", function() {
 
 
 //on click event for search button
+$("#search").on("click", function() {
+    event.preventDefault();
 
+    var userTitle = $("#titleInput").val().trim();
+    topics.push(userTitle);
+    createButton();
+    
+})
+
+// $("#titleInput").on("click", function(){
+//     $("#titleInput").attr("value", "");
+// })
 
 //on click event for show buttons
 $(document).on("click", ".show", grabGif);
 
-//on click for gifs to activate
 
 
-    //add data-state still attribute
 
-//ask why i had to use results instead of response.data.etc
+    
+
+//ask why I had to use results instead of response.data.etc
+//ask why I couldn't reassing variables

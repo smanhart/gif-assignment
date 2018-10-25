@@ -2,9 +2,14 @@
 <html>
     <head>
         <title>Cartoon Gifs</title>
-
+        <link rel="stylesheet" href="assets/css/style.css"/>
     </head>
     <body>
+        <div class="jumbotron">
+            <h1 class="display-4">Cartoon Gifs</h1>
+            <hr class="my-4">
+            <p>To brighten your day!</p>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -17,27 +22,27 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-9">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="gifHolder"></div>
-                            <!-- <img src="https://via.placeholder.com/350x350" alt="..." class="img-thumbnail"> -->
-                        </div>
-                    </div>
-                </div>
                 <div class="col-md-3">
                     <div class="card">
                         <div class="card-body">
                             <form class="form">
                                 <div class="form-group">
                                     <label for="search">Add a cartoon!</label>
-                                    <input type="search" class="form-control" id="titleInput">
+                                    <input type="search" class="form-control" id="titleInput" value="">
                                 </div>
                             </form>
                             <button class="btn btn-primary" id="search">Search</button>
                         </div>
                     </div>
                 </div>
+                <div class="col-md-9">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="gifHolder"></div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </div>
 
