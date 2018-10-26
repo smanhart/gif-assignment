@@ -59,7 +59,7 @@ function grabGif() {
 
             var b = $("<button>")
                 .addClass("fav")
-                .text("Add Favorite");
+                .text("Add To Favorites");
 
             gifContainer.append(p);
             
@@ -68,8 +68,6 @@ function grabGif() {
             $(".gifHolder").prepend(gifContainer);
         }
 
-        // stillURL = results[i].images.fixed_height_still.url
-        // activeURL = results[i].images.fixed_height.url
     })
 }
 
@@ -132,9 +130,3 @@ createFavs();
     //update it with the function, inside of createvfavs
     //push array to local storage, inside of click event
 
-
-    
-
-//ask why I had to use results instead of response.data.etc
-//ask why I couldn't reassign variables
-//ask about ajax link
