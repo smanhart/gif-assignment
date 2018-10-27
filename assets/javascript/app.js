@@ -47,10 +47,10 @@ function grabGif() {
             var gifContainer = $("<div>");
 
             // var imageURL = results[i].images.fixed_height_still.url;   
-            var imageURL = response.data[i].images.fixed_height_still.url
+            var imageURL = response.data[i].images.fixed_width_still.url
             var gifImage = $("<img>")
             gifImage.attr("src", imageURL);
-            gifImage.attr("data-active", results[i].images.fixed_height.url)
+            gifImage.attr("data-active", results[i].images.fixed_width.url)
             gifImage.attr("data-still", imageURL); 
             gifImage.attr("data-state", "still").addClass("gif");
 
@@ -96,15 +96,18 @@ $("#search").on("click", function() {
     
 })
 
-$("#titleInput").keypress(function(event) {
-    event.preventDefault();
-    if(event.which === 13) {
+// $("#titleInput").keypress(function(event) {
+//     event.preventDefault();
+//     if(event.which === 13) {
+//         var userTitle = $("#titleInput").val().trim();
+//         topics.push(userTitle);
+//         createButton();
     
-    var userTitle = $("#titleInput").val().trim();
-    topics.push(userTitle);
-    createButton();
-    }
-})
+//     }
+//     else{
+    
+//     }
+// })
 
 
 //on click event for show buttons
@@ -115,24 +118,38 @@ $(document).on("click", ".fav", function(){
     var favSrc = $($(this)).parent().children("img").attr("src");
     var favActive = $($(this)).parent().children("img").attr("data-active");
     var favStill = $($(this)).parent().children("img").attr("data-still");
-    localStorage.setItem("favGifSrc", favSrc);
-    localStorage.setItem("favGifActive", favActive);
-    localStorage.setItem("favGifStill", favStill);
+    favArray.push({favGifSrc: favSrc, favGifActive: favActive, favGifStill: favStill});
+    localStorage.clear();
+    localStorage.setItem("favArray", JSON.stringify(favArray));
+    console.log(favArray);
+    // localStorage.setItem("favGifSrc", favSrc);
+    // localStorage.setItem("favGifActive", favActive);
+    // localStorage.setItem("favGifStill", favStill);
     createFavs();
 })
 
 //grabs info from local storage and puts on page
 function createFavs() {
-    var getFavSrc = localStorage.getItem("favGifSrc");
-    var getFavActive = localStorage.getItem("favGifActive");
-    var getFavStill = localStorage.getItem("favGifStill")
-    var newFav = $("<img>")
-        .addClass("gif")
-        .attr("data-active", getFavActive)
-        .attr("data-still", getFavStill)
-        .attr("data-state", "still")
-        .attr("src", getFavSrc);
-    $(".favorites").prepend(newFav); 
+    var retrieveArray = JSON.parse(localStorage.getItem("favArray"));
+    // $(".favorites").clear();
+    console.log(retrieveArray);
+    for (var i=0; i<retrieveArray.length; i++) {
+
+        var getFavSrc = retrieveArray[i].favGifSrc
+        // var getFavSrc = localStorage.getItem("favGifSrc");
+        var getFavActive = retrieveArray[i].favGifActive
+        // var getFavActive = localStorage.getItem("favGifActive");
+        var getFavStill = retrieveArray[i].favGifStill
+        // var getFavStill = localStorage.getItem("favGifStill")
+        var newFav = $("<img>")
+            .addClass("gif")
+            .attr("data-active", getFavActive)
+            .attr("data-still", getFavStill)
+            .attr("data-state", "still")
+            .attr("src", getFavSrc);
+        
+        $(".favorites").prepend(newFav); 
+    }
 }
 createFavs();
 //create an array globally

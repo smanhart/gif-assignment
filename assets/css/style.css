@@ -8,18 +8,29 @@ body {
 }
 
 .jumbotron {
-    background: #f4dea8;
+    /* background: #f4dea8; */
+    background: #f3efc4;
     font-family: 'Fontdiner Swanky', cursive;
 }
 
 button, .btn {
     padding: 3px 10px;
-    background-color: #f3efc4;
+    /* background-color: #f3efc4; */
+    background: #f4dea8;
     border: 1px solid black;
     border-radius: 30px;
     color: black;
 }
 
+button:hover {
+    background: #f3efc4;
+    color: black;
+}
+
+.btn:hover {
+    background: #f3efc4;
+    color: black;
+}
 
 .card {
     background-color: #bceae3;
@@ -32,4 +43,8 @@ button, .btn {
 h3 {
     text-align: center;
     font-family: 'Fontdiner Swanky', cursive;
+}
+
+.gif {
+    margin: 5px;
 }
