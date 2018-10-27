@@ -96,7 +96,16 @@ $("#search").on("click", function() {
     
 })
 
-// x
+$("#titleInput").keypress(function(event) {
+    event.preventDefault();
+    if(event.which === 13) {
+    
+    var userTitle = $("#titleInput").val().trim();
+    topics.push(userTitle);
+    createButton();
+    }
+})
+
 
 //on click event for show buttons
 $(document).on("click", ".show", grabGif);
