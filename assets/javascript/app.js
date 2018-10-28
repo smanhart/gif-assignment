@@ -30,7 +30,7 @@ function grabGif() {
     console.log(showNoSpace)
     
     
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + showNoSpace + "&api_key=9hUJ888Kc8SXY9TRfbZNZ6ge8p8GaVs2&limit=10"
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + showNoSpace + "&api_key=9hUJ888Kc8SXY9TRfbZNZ6ge8p8GaVs2&limit=10"
     //pull info from api
     $.ajax({
         url: queryURL,
