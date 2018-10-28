@@ -21,15 +21,14 @@ function createButton() {
 createButton();
 
 //function to replace spaces with +
-    //for loop to get all spaces
+   
 
 function grabGif() {
     var show = $(this).attr("data-name");
 
-    // for(var i=0; i<show.length; i++) {
     var showNoSpace = show.replace(/ /g, "+")
     console.log(showNoSpace)
-    // }
+    
     
     var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + showNoSpace + "&api_key=9hUJ888Kc8SXY9TRfbZNZ6ge8p8GaVs2&limit=10"
     //pull info from api
@@ -37,20 +36,16 @@ function grabGif() {
         url: queryURL,
         method: "GET"
     }).then(function(response) {
-        // console.log(response);
-
+        
         var results = response.data
         
-        
-
         for(var i=0; i<results.length; i++) {
             var gifContainer = $("<div>");
 
-            // var imageURL = results[i].images.fixed_height_still.url;   
-            var imageURL = response.data[i].images.fixed_width_still.url
+            var imageURL = results[i].images.fixed_height_still.url;   
             var gifImage = $("<img>")
             gifImage.attr("src", imageURL);
-            gifImage.attr("data-active", results[i].images.fixed_width.url)
+            gifImage.attr("data-active", results[i].images.fixed_height.url)
             gifImage.attr("data-still", imageURL); 
             gifImage.attr("data-state", "still").addClass("gif");
 
@@ -87,7 +82,7 @@ $(document).on("click", ".gif", function() {
 
 
 //on click event for search button
-$("#search").on("click", function() {
+$("form").on("submit", function(event) {
     event.preventDefault();
 
     var userTitle = $("#titleInput").val().trim();
@@ -96,35 +91,19 @@ $("#search").on("click", function() {
     
 })
 
-// $("#titleInput").keypress(function(event) {
-//     event.preventDefault();
-//     if(event.which === 13) {
-//         var userTitle = $("#titleInput").val().trim();
-//         topics.push(userTitle);
-//         createButton();
-    
-//     }
-//     else{
-    
-//     }
-// })
-
-
 //on click event for show buttons
 $(document).on("click", ".show", grabGif);
 
 //on click for favorates button
 $(document).on("click", ".fav", function(){
+    $(".favorites").empty();
     var favSrc = $($(this)).parent().children("img").attr("src");
     var favActive = $($(this)).parent().children("img").attr("data-active");
     var favStill = $($(this)).parent().children("img").attr("data-still");
     favArray.push({favGifSrc: favSrc, favGifActive: favActive, favGifStill: favStill});
-    localStorage.clear();
+    // localStorage.clear();
     localStorage.setItem("favArray", JSON.stringify(favArray));
     console.log(favArray);
-    // localStorage.setItem("favGifSrc", favSrc);
-    // localStorage.setItem("favGifActive", favActive);
-    // localStorage.setItem("favGifStill", favStill);
     createFavs();
 })
 
@@ -136,11 +115,9 @@ function createFavs() {
     for (var i=0; i<retrieveArray.length; i++) {
 
         var getFavSrc = retrieveArray[i].favGifSrc
-        // var getFavSrc = localStorage.getItem("favGifSrc");
         var getFavActive = retrieveArray[i].favGifActive
-        // var getFavActive = localStorage.getItem("favGifActive");
         var getFavStill = retrieveArray[i].favGifStill
-        // var getFavStill = localStorage.getItem("favGifStill")
+        
         var newFav = $("<img>")
             .addClass("gif")
             .attr("data-active", getFavActive)
@@ -152,7 +129,5 @@ function createFavs() {
     }
 }
 createFavs();
-//create an array globally
-    //update it with the function, inside of createvfavs
-    //push array to local storage, inside of click event
+
 
